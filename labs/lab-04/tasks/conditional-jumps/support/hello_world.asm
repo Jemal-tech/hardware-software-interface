@@ -4,6 +4,7 @@
 
 section .data
     myString: db "Hello, World!", 0
+    goodBye: db "Goodbye, World!", 0
     N: dq 6                         ; N = 6
 
 section .text
@@ -28,9 +29,11 @@ main:
 
 print:
     PRINTF64 `%s\n\x0`, myString
-                                    ; TODO2.2: print "Hello, World!" N times
-                                    ; TODO2.1: print "Goodbye, World!"
+    dec rcx                                          ; TODO2.2: print "Hello, World!" N times
+    cmp rcx, 0     
+    je print
     xor rax, rax
-
+    
+    PRINTF64 `%s\n\x0`, goodBye                      ; TODO2.1: print "Goodbye, World!"
     leave
     ret
