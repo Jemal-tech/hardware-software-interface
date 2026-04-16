@@ -20,7 +20,7 @@ main:
     mov rax, 2
     mov r8, 1
     cmp rax, r8
-    je print                        ; TODO1: rax > r8?
+    jg print                        ; TODO1: rax > r8?
     xor rax, rax
 
     leave
