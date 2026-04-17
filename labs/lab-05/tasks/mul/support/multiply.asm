@@ -47,7 +47,7 @@ main:
 
     ; Multiplication for dq
     mov rax, qword [num1_q]
-    mov rbx, qword [num2_d]
+    mov rbx, qword [num2_q]
     mul rbx
 
     PRINTF64 `Result is: 0x%lx%16lx\n\x0`, rdx, rax
