@@ -12,4 +12,8 @@ extern printf
 global main
 main:
 	; TODO: Implement the code to count negative and positive numbers in the array
+	xor rcx, rcx
+	mov rcx, ARRAY_SIZE
+pos_neg_counter:
+	
     ret
