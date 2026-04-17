@@ -32,11 +32,59 @@ add_byte_array_element:
 
     ; TODO Compute sum for elements in word_array
 
+; Word array sum
+    mov rcx, ARRAY_SIZE     ; Use rcx as loop counter
+    xor rax, rax            ; Use rax to store the sum
+    xor rdx, rdx            ; Store current value in dl; zero entire rdx
+add_word_array_element:
+    mov dx, word [word_array + 2*rcx - 2]
+    add rax, rdx
+    loop add_word_array_element
+
+    PRINTF64 `Word array sum: %u\n\x0`, rax
+
     ; TODO Compute sum for elements in dword_array
+; Dword array sum
+    mov rcx, ARRAY_SIZE     ; Use rcx as loop counter
+    xor rax, rax            ; Use rax to store the sum
+    xor rdx, rdx            ; Store current value in dl; zero entire rdx
+add_dword_array_element:
+    mov edx, dword [dword_array + 4*rcx - 4]
+    add rax, rdx
+    loop add_dword_array_element
+
+    PRINTF64 `Dword array sum: %u\n\x0`, rax
 
     ; TODO Compute sum for elements in qword_array
+;Qword array sum
+    mov rcx, ARRAY_SIZE     ; Use rcx as loop counter
+    xor rax, rax            ; Use rax to store the sum
+    xor rdx, rdx            ; Store current value in dl; zero entire rdx
+add_qword_array_element:
+    mov rdx, qword [qword_array + 8*rcx - 8]
+    add rax, rdx
+    loop add_qword_array_element
+
+    PRINTF64 `Word array sum: %lu\n\x0`, rax
 
     ; TODO Compute sum for elements in big_qword_array
+;Bigword array sum
+    xor r8, r8
+    mov rax, qword [big_qword_array]
+    add rax, qword [big_qword_array + 8]
+    jnc no_first_carry
+    inc r8
+
+no_first_carry:
+    add rax, qword [big_qword_array + 16]
+    jnc no_second_carry
+    inc r8
+
+no_second_carry:
+    mov rdx, r8
+
+    PRINTF64 `128-bit addition example: 0x%lx%016lx\n\x0`, rdx, rax
+
 
     leave
     ret
